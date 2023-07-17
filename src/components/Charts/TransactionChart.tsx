@@ -8,8 +8,8 @@ type Props = {
 
 const DynamicReportsPDFNoSSR = dynamic(
   async () => {
-    const module = await import("@/components/Reports/ReportsPDF");
-    return module.ReportsPDF;
+    const mod = await import("@/components/Reports/ReportsPDF");
+    return mod.ReportsPDF;
   },
   { ssr: false }
 );
