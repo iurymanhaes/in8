@@ -60,7 +60,9 @@ export function DailyExpenses({ transactions }: Props) {
             <InfoTable transactions={todaysTransactions} />
           </Col>
 
-          <DynamicReportsPDFNoSSR transactions={todaysTransactions} />
+          {todaysTransactions.length < 0 && (
+            <DynamicReportsPDFNoSSR transactions={todaysTransactions} />
+          )}
         </Row>
       )}
     </div>
