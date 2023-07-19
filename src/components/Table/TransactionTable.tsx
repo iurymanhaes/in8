@@ -62,6 +62,7 @@ function TransactionTable({ filteredTransactions }: Props) {
 
   return (
     <Table
+      rowKey="id"
       columns={columns}
       dataSource={filteredTransactions}
       pagination={{ position: ["bottomLeft"], defaultPageSize: 5 }}

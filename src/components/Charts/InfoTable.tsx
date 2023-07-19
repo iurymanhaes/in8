@@ -33,6 +33,7 @@ function InfoTable({ transactions }: Props) {
 
   return (
     <Table
+      rowKey="id"
       columns={columns}
       dataSource={transactions}
       pagination={{ position: ["bottomLeft"], defaultPageSize: 5 }}

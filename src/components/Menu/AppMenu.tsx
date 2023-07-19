@@ -1,14 +1,46 @@
-import React from "react";
-import { Menu } from "antd";
+import React, { useState } from "react";
+import { Menu, MenuProps } from "antd";
 import {
   HomeOutlined,
-  UserOutlined,
+  GithubOutlined,
   DollarOutlined,
   PieChartOutlined,
 } from "@ant-design/icons";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function AppMenu() {
+  const [current, setCurrent] = useState("/");
+  const router = useRouter();
+
+  const menuItems = [
+    {
+      key: "/",
+      icon: <HomeOutlined />,
+      label: "Início",
+    },
+    {
+      key: "transaction",
+      icon: <DollarOutlined />,
+      label: "Transações",
+    },
+    {
+      key: "charts",
+      icon: <PieChartOutlined />,
+      label: "Relatórios",
+    },
+    {
+      key: "github",
+      icon: <GithubOutlined />,
+      label: "Github",
+    },
+  ];
+
+  const onClick: MenuProps["onClick"] = (e) => {
+    if (e.key !== "github") {
+      router.push(e.key);
+      setCurrent(e.key);
+    } else window.open("https://github.com/iurymanhaes/in8", "_blank");
+  };
   return (
     <>
       <h1
@@ -23,19 +55,11 @@ export default function AppMenu() {
       </h1>
       <Menu
         mode="inline"
-        defaultSelectedKeys={["1"]}
+        selectedKeys={[current]}
         style={{ backgroundColor: "#5041BC", color: "#FFF" }}
-      >
-        <Menu.Item key="1" icon={<HomeOutlined />}>
-          <Link href="/">Início</Link>
-        </Menu.Item>
-        <Menu.Item key="3" icon={<DollarOutlined />}>
-          <Link href="/transaction">Transações</Link>
-        </Menu.Item>
-        <Menu.Item key="4" icon={<PieChartOutlined />}>
-          <Link href="/charts">Relatórios</Link>
-        </Menu.Item>
-      </Menu>
+        items={menuItems}
+        onClick={onClick}
+      />
     </>
   );
 }
